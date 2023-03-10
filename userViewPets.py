@@ -1,4 +1,3 @@
-import userMainMenu
 
 def userViewPets():
     print("=========Available Pet Details=========")
@@ -6,17 +5,18 @@ def userViewPets():
     print("[2] Cats")
     print("[3] Exit")
     print("=======================================")
-    userViewPetsSelection = int(input("Enter a number:"))
+    userViewPetsSelection = input("Enter a number:")
 
     match userViewPetsSelection:
-        case 1:  #dogs()
+        case "1":  #dogs()
+            input("Press Enter to continue...")
             pass
-        case 2:  #cats()
+        case "2":  #cats()
+            input("Press Enter to continue...")
             pass
-        case 3:userMainMenu.userMainMenu()
+        case "3": pass
         case _:
             print("Invalid input. Please try again.")
             userViewPets()
-            pass
 
 
