@@ -1,6 +1,5 @@
 import mainMenu
-import userViewPets
-import userAdopt
+import userViewPets, userAdopt
 
 #user login module goes here
 

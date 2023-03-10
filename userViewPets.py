@@ -17,7 +17,7 @@ def userViewPets():
             userMainMenu.userMainMenu()
         case _:
             print("Invalid input. Please try again.")
-            userMainMenu()
+            userViewPets()
             pass
 
 userMainMenu()
