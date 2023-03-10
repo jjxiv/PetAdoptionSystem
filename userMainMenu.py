@@ -20,7 +20,6 @@ def userMainMenu():
 
     match userMainMenuSelection:
         case "1":
-            os.system('cls')
             userViewPets.userViewPets()
             userMainMenu()
         case "2":
