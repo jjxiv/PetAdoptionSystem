@@ -22,5 +22,4 @@ def userAdopt():
             print("Invalid input. Please try again.")
             userAdopt()
 
-userMainMenu()
 
