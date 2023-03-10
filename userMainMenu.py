@@ -1,4 +1,8 @@
 import mainMenu
+import userViewPets
+import userAdopt
+import userDisplayOwned
+import userModifyInfo
 
 #user login module goes here
 
@@ -13,13 +17,17 @@ def userMainMenu():
     userMainMenuSelection = int(input("Enter a number:"))
 
     match userMainMenuSelection:
-        case 1:  #userViewPets()
+        case 1:
+            userViewPets.userViewPets()
             pass
-        case 2:  #userAdopt()
+        case 2:
+            userAdopt.userAdopt()
             pass
-        case 3:  #userDisplayOwned()
+        case 3:
+            userDisplayOwned.userDisplayOwned()
             pass
-        case 4:  #userModifyInfo()
+        case 4:
+            userModifyInfo.userModifyInfo()
             pass
         case 5:  #userLogout()
             # log out the user
@@ -27,7 +35,6 @@ def userMainMenu():
             pass
         case _:
             print("Invalid input. Please try again.")
-            userMainMenu()
             pass
 
 userMainMenu()
