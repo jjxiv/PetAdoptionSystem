@@ -8,7 +8,7 @@ def userModifyInfo():
     password = str(input("Enter new password:"))
     name = str(input("Enter name:"))
     emailAddress = str(input("Enter email address:"))
-    birthday = str(input("Enter Birthday:"))
+    birthday = str(input("Enter birthday:"))
 
     print("Username: ", userName)
     print("Password: ", password)
