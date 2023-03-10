@@ -6,6 +6,8 @@
     Email:
 """
 
+import register
+
 
 
 if __name__ == "__main__":
@@ -20,9 +22,11 @@ if __name__ == "__main__":
         case 1:
             pass
             # Register Function
+            register.hello()
         case 2:
             pass
             #User Login
+
         case 3:
             pass
             #Admin Login
