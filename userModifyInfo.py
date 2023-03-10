@@ -1,4 +1,4 @@
-import userMainMenu
+
 
 def userModifyInfo():
 
@@ -23,14 +23,11 @@ def userModifyInfo():
             #save changes to db
             print("Information successfully updated.")
             input("Press Enter to continue...")
-            userMainMenu.userMainMenu()
+            pass
         case "n" | "N":
             print("Operation cancelled.")
             input("Press Enter to continue...")
-            userMainMenu.userMainMenu()
+            pass
         case _:
             print("Invalid input. Please try again.")
             userModifyInfo()
-
-
-

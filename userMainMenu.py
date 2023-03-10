@@ -1,3 +1,5 @@
+import os
+
 import mainMenu
 import userViewPets
 import userAdopt
@@ -14,25 +16,25 @@ def userMainMenu():
     print("[4] Modify User Information")
     print("[5] Logout")
     print("=======================================")
-    userMainMenuSelection = int(input("Enter a number:"))
+    userMainMenuSelection = input("Enter a number:")
 
     match userMainMenuSelection:
-        case 1:
+        case "1":
             userViewPets.userViewPets()
-            pass
-        case 2:
+            userMainMenu()
+        case "2":
             userAdopt.userAdopt()
-            pass
-        case 3:
+            userMainMenu()
+        case "3":
             userDisplayOwned.userDisplayOwned()
-            pass
-        case 4:
+            userMainMenu()
+        case "4":
             userModifyInfo.userModifyInfo()
-            pass
-        case 5:  #userLogout()
+            userMainMenu()
+        case "5":  #userLogout()
             # log out the user
             mainMenu.mainMenu()
-            pass
+            userMainMenu()
         case _:
             print("Invalid input. Please try again.")
             pass
