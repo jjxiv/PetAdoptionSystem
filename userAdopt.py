@@ -11,7 +11,6 @@ def userAdopt():
     match confirmq:
         case "y" | "Y":
             #assign userid to selected pet
-            #among
             print("Pet has been added to your listing.")
             input("Press Enter to continue...")
             pass
