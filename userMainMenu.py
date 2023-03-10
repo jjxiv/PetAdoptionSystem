@@ -1,4 +1,5 @@
 import os
+#for screen clearing
 
 import mainMenu
 import userViewPets
