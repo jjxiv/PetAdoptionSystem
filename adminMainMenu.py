@@ -2,32 +2,128 @@ import mainMenu
 import adminAddPets
 import adminRemovePets
 import adminModifyPets
+import os
 
 #user login module goes here
 
-def adminMainMenu():
-    print("======Pet Adoption System - Admin======")
-    print("[1] Add Pets")
-    print("[2] Remove Pets")
-    print("[3] Modify Pet Information")
-    print("[4] Logout")
-    userMainMenuSelection = int(input("Enter a number:"))
+def login():
+    print("============Admin Login=============")
+    if os.path.exists("adminDatabase.txt"):
+        username = []
+        password = []
 
-    match userMainMenuSelection:
-        case 1:
-            adminAddPets.adminAddPets()
-            adminMainMenu()
-        case 2:
-            adminRemovePets.adminRemovePets()
-            adminMainMenu()
-        case 3:
-            adminModifyPets.adminModifyPets()
-            adminMainMenu()
-        case 4:  #userLogout()
-            # log out the user
-            mainMenu.mainMenu()
-            pass
-        case _:
-            print("Invalid input. Please try again.")
-            adminMainMenu()
-            pass
+        f = open("adminDatabase.txt", "r")
+        text = f.readline()
+        ctr = 1
+
+        while text:
+            if "Username:" in text:
+                uname = text.replace("Username:","")
+                uname = uname.replace("\n", "")
+                username.append(uname)
+            elif "Password:" in text:
+                pword = text.replace("Password:","")
+                pword = pword.replace("\n", "")
+                password.append(pword)
+            text = f.readline()
+
+        userNameInput = str(input("Enter username: "))
+
+        if userNameInput in username:
+            userPasswordInput = str(input("Enter password: "))
+            uIndex = username.index(userNameInput)
+            pIndex = password[uIndex]
+
+            if userPasswordInput == pIndex:
+                print("Successful Login")
+                adminMainMenu()
+            else:
+                print("Invalid credentials")
+        else:
+            print("Invalid credentials")
+
+    else:
+        print("[System] There is no existing admin database")
+
+
+def adminAddPets():
+    print("============Add Pets=============")
+    if os.path.exists("petDatabase.txt"):
+        print("[System] Retrieving existing files")
+        f = open("petDatabase.txt", "r+")
+        petID = []
+        text = f.readline()
+
+        while text:
+            if "PetID:" in text:
+                petID.append(text)
+            text = f.readline()
+
+
+        print("PetID values:", petID)
+        print("")
+        if petID:
+            lastID = petID[-1]
+            lastID = lastID.replace("PetID:", "")
+            lastID = str(int(lastID) + 1)
+            f.write("\n")
+            f.write("PetID:" + lastID + "\n")
+        else:
+            f.write("PetID:1\n")
+
+
+    else:
+        print("[System] Creating a new file")
+        f = open("petDatabase.txt", "w")
+        f.write("PetID:" + "1\n")
+        pass
+
+    petName = str(input("Enter Pet Name: "))
+    petBreed = str(input("Enter Pet Breed: "))
+    petGender = str(input("Enter Pet Gender: "))
+    petAge = str(input("Enter Pet Age: "))
+    petPicture = str(input("Enter Pet Picture: "))
+    print()
+
+    print("Registration information:")
+    print("Pet Name:", petName)
+    print("Pet Breed:", petBreed)
+    print("Pet Gender:", petGender)
+    print("Pet Age:", petAge)
+    print("Pet Picture:",petPicture)
+    print("=======================================")
+    input("Press Enter to continue...")
+
+    f.write("OwnerID:null\n")
+    f.write("Name:" + petName + "\n")
+    f.write("Breed:" + petBreed + "\n")
+    f.write("Gender:" + petGender + "\n")
+    f.write("Age:" + petAge + "\n")
+    f.write("Picture:" + petPicture + "\n")
+    f.close()
+
+    pass
+
+def adminMainMenu():
+    condition = True
+    while condition:
+        print("======Pet Adoption System - Admin======")
+        print("[1] Add Pets")
+        print("[2] Remove Pets")
+        print("[3] Modify Pet Information")
+        print("[4] Logout")
+        userMainMenuSelection = int(input("Enter a number:"))
+        match userMainMenuSelection:
+            case 1:
+                adminAddPets()
+            case 2:
+                adminRemovePets.adminRemovePets()
+            case 3:
+                adminModifyPets.adminModifyPets()
+            case 4:  #userLogout()
+                # log out the user
+                condition = False
+                print("[System] Program Terminated")
+                # CLEAR login token
+            case _:
+                print("Invalid input. Please try again.")

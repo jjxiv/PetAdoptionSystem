@@ -5,7 +5,7 @@
     Date:
     Email:
 """
-
+import adminMainMenu
 import viewPets, userMainMenu, os
 
 def register():
@@ -67,39 +67,33 @@ def register():
 
 def mainMenu():
     condition = True
-    print("==========Pet Adoption System==========")
-    print("[1] Register")
-    print("[2] User Login")
-    print("[3] Admin Login")
-    print("[4] View Available Pets")
-    print("[5] Exit")
-    print("=======================================")
-
     #WARNING: insert validation here
     while condition:
+        print("==========Pet Adoption System==========")
+        print("[1] Register")
+        print("[2] User Login")
+        print("[3] Admin Login")
+        print("[4] View Available Pets")
+        print("[5] Exit")
+        print("=======================================")
         mm = int(input("Enter a number: "))
         match mm:
             case 1:
-                pass
                 # Register Function
                 register()
             case 2:
-                pass
                 #User Login
                 userMainMenu.login()
             case 3:
-                pass
                 #Admin Login
-                print("Dummy text Admin login")
+                adminMainMenu.adminMainMenu()
             case 4:
-                pass
                 viewPets.availablePets()
                 #View Available Pets
             case 5:
                 condition = False
                 print("[System] Program Terminated")
             case _:
-                pass
                 print("Error, try again.")
 
 

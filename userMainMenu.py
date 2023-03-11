@@ -44,38 +44,35 @@ def login():
     else:
         print("[System] There is no existing user database")
 
-    # print("Usernames: ", username)
-    # print("Passwords: ", password)
 
 def userMainMenu():
-    print("==========Pet Adoption System==========")
-    print("[1] Available Pet Details ")
-    print("[2] Adopt A Pet")
-    print("[3] View All Your Adopted Pets")
-    print("[4] Modify User Information")
-    print("[5] Logout")
-    print("=======================================")
-    userMainMenuSelection = int(input("Enter a number:"))
+    condition = True
 
-    match userMainMenuSelection:
-        case "1":
-            userViewPets.userViewPets()
-            userMainMenu()
-        case "2":
-            userAdopt.userAdopt()
-            userMainMenu()
-        case "3":
-            userDisplayOwned.userDisplayOwned()
-            userMainMenu()
-        case "4":
-            userModifyInfo.userModifyInfo()
-            userMainMenu()
-        case "5":  #userLogout()
-            # log out the user
-            mainMenu.mainMenu()
-            userMainMenu()
-        case _:
-            print("Invalid input. Please try again.")
-            pass
+    while condition:
+        print("==========Pet Adoption System==========")
+        print("[1] Available Pet Details ")
+        print("[2] Adopt A Pet")
+        print("[3] View All Your Adopted Pets")
+        print("[4] Modify User Information")
+        print("[5] Logout")
+        print("=======================================")
+        userMainMenuSelection = int(input("Enter a number:"))
 
-# userMainMenu()
+        match userMainMenuSelection:
+            case 1:
+                userViewPets.userViewPets()
+
+            case 2:
+                userAdopt.userAdopt()
+
+            case 3:
+                userDisplayOwned.userDisplayOwned()
+            case 4:
+                userModifyInfo.userModifyInfo()
+
+            case 5:  #userLogout()
+                condition = False
+                print("[System] Program Terminated")
+                #CLEAR login token
+            case _:
+                print("Error, try again.")

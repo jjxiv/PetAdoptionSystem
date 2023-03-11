@@ -1,0 +1,6 @@
+AdminID:1
+Username:amateurre
+Password:imracist
+Name:racist 2x
+EmailAddress:iloveracism@gmail.com
+Bday:06/14/2002

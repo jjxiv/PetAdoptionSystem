@@ -1,0 +1,6 @@
+UserID:1
+Username:bingka
+Password:im255
+Name:bingkabingka
+EmailAddress:bingkanator@gmail.com
+Bday:05/20/2001
