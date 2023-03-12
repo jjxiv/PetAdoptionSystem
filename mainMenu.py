@@ -77,6 +77,7 @@ def mainMenu():
         print("[5] Exit")
         print("=======================================")
         mm = int(input("Enter a number: "))
+
         match mm:
             case 1:
                 # Register Function

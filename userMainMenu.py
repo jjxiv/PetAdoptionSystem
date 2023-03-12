@@ -61,7 +61,7 @@ def userMainMenu():
         match userMainMenuSelection:
             case 1:
                 userViewPets.userViewPets()
-
+                print("went here!!!!")
             case 2:
                 userAdopt.userAdopt()
 
@@ -69,7 +69,6 @@ def userMainMenu():
                 userDisplayOwned.userDisplayOwned()
             case 4:
                 userModifyInfo.userModifyInfo()
-
             case 5:  #userLogout()
                 condition = False
                 print("[System] Program Terminated")

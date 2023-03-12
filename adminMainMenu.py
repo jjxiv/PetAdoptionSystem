@@ -14,7 +14,6 @@ def login():
 
         f = open("adminDatabase.txt", "r")
         text = f.readline()
-        ctr = 1
 
         while text:
             if "Username:" in text:
@@ -47,62 +46,82 @@ def login():
 
 
 def adminAddPets():
-    print("============Add Pets=============")
-    if os.path.exists("petDatabase.txt"):
-        print("[System] Retrieving existing files")
-        f = open("petDatabase.txt", "r+")
-        petID = []
-        text = f.readline()
+    dogsDB = "dogsDatabase.txt"
+    catsDB = "catsDatabase.txt"
+    valid = False
 
-        while text:
-            if "PetID:" in text:
-                petID.append(text)
+    print("============Add Pets=============")
+    print("[1] - Dogs")
+    print("[2] - Cats")
+    choice = int(input("Enter a number: "))
+
+    match choice:
+        case 1:
+            petsDB = dogsDB
+            valid = True
+        case 2:
+            petsDB = catsDB
+            valid = True
+        case __:
+            print("Entered value is invalid: ",choice)
+
+
+
+    if valid == True:
+        if os.path.exists(petsDB):
+            print("[System] Retrieving existing files")
+            f = open(petsDB, "r+")
+            petID = []
             text = f.readline()
 
+            while text:
+                if "PetID:" in text:
+                    petID.append(text)
+                text = f.readline()
 
-        print("PetID values:", petID)
-        print("")
-        if petID:
-            lastID = petID[-1]
-            lastID = lastID.replace("PetID:", "")
-            lastID = str(int(lastID) + 1)
-            f.write("\n")
-            f.write("PetID:" + lastID + "\n")
+            print("PetID values:", petID)
+            print("")
+            if petID:
+                lastID = petID[-1]
+                lastID = lastID.replace("PetID:", "")
+                lastID = str(int(lastID) + 1)
+                f.write("\n")
+                f.write("PetID:" + lastID + "\n")
+            else:
+                f.write("PetID:1\n")
+
+
         else:
-            f.write("PetID:1\n")
+            print("[System] Creating a new file")
+            f = open(petsDB, "w")
+            f.write("PetID:" + "1\n")
+            pass
 
+        petName = str(input("Enter Pet Name: "))
+        petBreed = str(input("Enter Pet Breed: "))
+        petGender = str(input("Enter Pet Gender: "))
+        petAge = str(input("Enter Pet Age: "))
+        petPicture = str(input("Enter Pet Picture: "))
+        print()
 
+        print("Registration information:")
+        print("Pet Name:", petName)
+        print("Pet Breed:", petBreed)
+        print("Pet Gender:", petGender)
+        print("Pet Age:", petAge)
+        print("Pet Picture:", petPicture)
+        print("=======================================")
+        input("Press Enter to continue...")
+
+        f.write("OwnerID:null\n")
+        f.write("Name:" + petName + "\n")
+        f.write("Breed:" + petBreed + "\n")
+        f.write("Gender:" + petGender + "\n")
+        f.write("Age:" + petAge + "\n")
+        f.write("Picture:" + petPicture + "\n")
+        f.close()
     else:
-        print("[System] Creating a new file")
-        f = open("petDatabase.txt", "w")
-        f.write("PetID:" + "1\n")
-        pass
-
-    petName = str(input("Enter Pet Name: "))
-    petBreed = str(input("Enter Pet Breed: "))
-    petGender = str(input("Enter Pet Gender: "))
-    petAge = str(input("Enter Pet Age: "))
-    petPicture = str(input("Enter Pet Picture: "))
-    print()
-
-    print("Registration information:")
-    print("Pet Name:", petName)
-    print("Pet Breed:", petBreed)
-    print("Pet Gender:", petGender)
-    print("Pet Age:", petAge)
-    print("Pet Picture:",petPicture)
-    print("=======================================")
-    input("Press Enter to continue...")
-
-    f.write("OwnerID:null\n")
-    f.write("Name:" + petName + "\n")
-    f.write("Breed:" + petBreed + "\n")
-    f.write("Gender:" + petGender + "\n")
-    f.write("Age:" + petAge + "\n")
-    f.write("Picture:" + petPicture + "\n")
-    f.close()
-
-    pass
+        print("Returning to menu")
 
 def adminMainMenu():
     condition = True
