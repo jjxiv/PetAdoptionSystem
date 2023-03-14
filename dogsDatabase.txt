@@ -1,14 +1,6 @@
-PetID:1
-OwnerID:null
-Name:pp
-Breed:pp
-Gender:pp
-Age:pp
-Picture:pp
-
 PetID:2
-OwnerID:null
-Name:pp
+OwnerID:3
+Name:pp2
 Breed:pp
 Gender:pp
 Age:pp
@@ -16,15 +8,23 @@ Picture:pp
 
 PetID:3
 OwnerID:null
-Name:pp
+Name:Doge
+Breed:Shiba Inu
+Gender:Male
+Age:2
+Picture:doge.jpeg
+
+PetID:1
+OwnerID:3
+Name:pp1
 Breed:pp
 Gender:pp
 Age:pp
 Picture:pp
 
-PetID:4
-OwnerID:null
-Name:pp
+PetID:3
+OwnerID:3
+Name:pp3
 Breed:pp
 Gender:pp
 Age:pp
