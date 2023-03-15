@@ -1,6 +1,26 @@
-import os, adminMainMenu
+"""
+    File name:      adminModifyPets.py
+    Authors:        Jericho John Almoro,
+                    Rico Ray Alido
+    Description:    The file contains the method for modifying pets information.
+                    This method is only handled by the administrator upon access
+                    of these privileges.
+"""
+
+
+# Imported os library for file handling
+import os
+
+
+"""
+    Method name:    adminModifyPets()
+    Parameters:     none
+    Return Type:    none
+    Description:    A method that contains the modifying the pet's information
+                    and saves the modified information to the database.
+"""
 def adminModifyPets():
-    try:
+    # try:
         dogsDB = "dogsDatabase.txt"
         catsDB = "catsDatabase.txt"
         valid = False
@@ -10,6 +30,7 @@ def adminModifyPets():
         print("[2] - Cats")
         choice = int(input("Enter a number: "))
 
+        # Switch case will check the corresponding database
         match choice:
             case 1:
                 petsDB = dogsDB
@@ -20,6 +41,7 @@ def adminModifyPets():
             case __:
                 print("Entered value is invalid: ", choice)
 
+        # Checks the pet id and deletes from the text file
         if valid == True:
             if os.path.exists(petsDB):
                 petIDnumber = str(input("Input the Pet ID to modify:"))
@@ -30,25 +52,32 @@ def adminModifyPets():
 
                 if pid in lines:
                     temp = pid
+                    tempList = []
                     print("Pet information to be modified: ")
                     num = lines.index(pid)
                     if pid == lines[-7]:
                         for i in range(0, 7):
                             print(lines[num], end="")
+                            tempList.append(lines[num+i])
+                        for j in range(0,7):
                             del lines[num]
                     else:
                         for i in range(0, 8):
+                            tempList.append(lines[num+i])
+                        for j in range(0,8):
                             del lines[num]
+
+                    print("The value of tempList is: ",tempList)
 
                     with open(petsDB, "w") as f:
                         if lines:
                             if lines[-1] == "\n":
                                 del lines[-1]
+                                pass
                         f.writelines(lines)
                         print(pid.strip(), "is going to be modified")
 
-                    # Add the information again:
-
+                    # Add the information again
                     print("============Modify Information Pets=============")
                     if os.path.exists(petsDB):
                         print("[System] Retrieving existing files")
@@ -69,63 +98,59 @@ def adminModifyPets():
                             f.write(lastID)
                         else:
                             f.write("PetID:1\n")
-
-
                     else:
                         print("[System] Creating a new file")
                         f = open(petsDB, "w")
                         f.write("PetID:" + "1\n")
                         pass
 
-                    petName = str(input("Enter Pet Name: "))
-                    petBreed = str(input("Enter Pet Breed: "))
-                    petGender = str(input("Enter Pet Gender: "))
-                    petAge = str(input("Enter Pet Age: "))
-                    petPicture = str(input("Enter Pet Picture: "))
+                    petID = tempList[0]
+                    ownerID = tempList[1]
+                    petName = "Name:"+str(input("Enter Pet Name: "))
+                    petBreed = "Breed:"+str(input("Enter Pet Breed: "))
+                    petGender = "Gender:"+str(input("Enter Pet Gender: "))
+                    petAge = "Age:"+str(input("Enter Pet Age: "))
+                    petPicture = "Picture:"+str(input("Enter Pet Picture: "))
                     print()
 
+                    print("=======================================")
                     print("Registration information:")
-                    print("Pet Name:", petName)
-                    print("Pet Breed:", petBreed)
-                    print("Pet Gender:", petGender)
-                    print("Pet Age:", petAge)
-                    print("Pet Picture:", petPicture)
+                    print(petID)
+                    print(ownerID)
+                    print(petName)
+                    print(petBreed)
+                    print(petGender)
+                    print(petAge)
+                    print(petPicture)
                     print("=======================================")
                     input("Press Enter to continue...")
 
-                    f.write("OwnerID:null\n")
-                    f.write("Name:" + petName + "\n")
-                    f.write("Breed:" + petBreed + "\n")
-                    f.write("Gender:" + petGender + "\n")
-                    f.write("Age:" + petAge + "\n")
-                    f.write("Picture:" + petPicture + "\n")
-                    f.close()
+                    # User will input if the modification should be saved
+                    confirmq = input("Save modification? [Y/N]")
 
+                    match confirmq:
+                        case "y" | "Y":
+                            f.write(ownerID)
+                            f.write(petName+"\n")
+                            f.write(petBreed+"\n")
+                            f.write(petGender+"\n")
+                            f.write(petAge+"\n")
+                            f.write(petPicture+"\n")
+                            print("[System] Registration success...")
+                        case "n" | "N":
+                            print("[System] Registration cancelled...")
+                            pass
+                        case _:
+                            print("[System] Invalid input, please try again...")
+                    input("Press Enter to continue...")
+                    f.close()
                 else:
                     print("[System] \"", pid.strip(), "\" does not exist.")
             else:
                 print("[System] There is no existing pet database")
         else:
             print("Returning to menu")
-    except:
-        input("Invalid input. Please try again.")
+    # except:
+    #     input("Invalid input. Please try again.")
 
-
-
-    # confirmq = input("Confirm Changes? [Y/N]")
-
-
-
-    # match confirmq:
-    #     case "y" | "Y":
-    #         # save changes to db
-    #         print("Information successfully updated.")
-    #         input("Press Enter to continue...")
-    #         pass
-    #     case "n" | "N":
-    #         print("Operation cancelled.")
-    #         input("Press Enter to continue...")
-    #         pass
-    #     case _:
-    #         print("Invalid input. Please try again.")
-    #         adminModifyPets()
+adminModifyPets()
