@@ -11,62 +11,72 @@ def adopt(petsDB,uID):
 
         if pid in lines:
             temp = []
-            print("Pet information to be adopted: ")
+            valid = False
+            # print("Pet information to be adopted: ")
             num = lines.index(pid)
-            print(lines)
+            # print(lines)
             print("The index of Pet id is: ",num)
-            for i in range(0,7):
-                temp.append(lines[num+i])
+            checkID = lines[num+1].strip()
 
-            print("Value of temp:",temp)
-
-            if pid == lines[-7]:
-                for i in range(0, 7):
-                    del lines[num]
+            if checkID != "OwnerID:null":
+                print("[System] Warning, the pet has an owner already.")
+                choice = input("Overwrite the existing owner?[y/n]: ")
+                match choice:
+                    case "y" | "Y":
+                        valid = True
+                        pass
+                    case "n" | "N":
+                        print("[System] Operation cancelled.")
+                        pass
+                    case _:
+                        print("[System] Invalid input. Please try again.")
+                        pass
             else:
-                for i in range(0, 8):
-                    del lines[num]
+                print("[System] Proceeding to adoption.")
+                valid = True
 
-            with open(petsDB, "w") as f:
-                if lines:
-                    if lines[-1] == "\n":
-                        del lines[-1]
-                f.writelines(lines)
-                print(pid.strip(), "has been deleted, now needs to be modified [DELETE THIS]")
+            if valid:
+                for i in range(0,7):
+                    temp.append(lines[num+i])
 
+                print("Value of temp:",temp)
 
-            """
-            PetID:1
-            OwnerID:null
-            Name:pp
-            Breed:pp
-            Gender:pp
-            Age:pp
-            Picture:pp
-            """
+                if pid == lines[-7]:
+                    for i in range(0, 7):
+                        del lines[num]
+                else:
+                    for i in range(0, 8):
+                        del lines[num]
 
+                with open(petsDB, "w") as f:
+                    if lines:
+                        if lines[-1] == "\n":
+                            del lines[-1]
+                    f.writelines(lines)
+                    print(pid.strip(), " owner has been modified.")
 
+                f = open(petsDB, "a")
+                petID = temp[0]
+                ownerIDTemp = uID.replace("UserID:","")
+                ownerIDTemp = ownerIDTemp.strip()
+                petOwner = "OwnerID:"+ownerIDTemp+"\n"
+                petName = temp[2]
+                petBreed = temp[3]
+                petGender = temp[4]
+                petAge = temp[5]
+                petPicture = temp[6]
 
-            f = open(petsDB, "a")
-
-            petID = temp[0]
-            ownerIDTemp = uID.replace("UserID:","")
-            petOwner = "OwnerID:"+str(ownerIDTemp)
-            petName = temp[2]
-            petBreed = temp[3]
-            petGender = temp[4]
-            petAge = temp[5]
-            petPicture = temp[6]
-
-            f.write("\n")
-            f.write(petID)
-            f.write(petOwner)
-            f.write(petName)
-            f.write(petBreed)
-            f.write(petGender)
-            f.write(petAge)
-            f.write(petPicture)
-            f.close()
+                f.write("\n")
+                f.write(petID)
+                f.write(petOwner)
+                f.write(petName)
+                f.write(petBreed)
+                f.write(petGender)
+                f.write(petAge)
+                f.write(petPicture)
+                f.close()
+            else:
+                print("[System] Adoption failed..")
 
         else:
             print("[System] \"", pid.strip(), "\" does not exist.")

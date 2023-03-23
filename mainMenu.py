@@ -38,14 +38,16 @@ def register():
             ctr+=1
 
         # Gets the last greatest ID value and automatically generate new ID
-        # !!! NEEDS TO BE FIXED !!!
-        # Note: Create a mechanism that will check for the greatest ID not, latest
         print("")
-        lastID = userID[-1]
-        lastID = lastID.replace("UserID:","")
+        idNum = []
+        for i in userID:
+            temp = int(i.replace("UserID:", "").strip())
+            idNum.append(temp)
+        lastID = max(idNum)
         lastID = str(int(lastID)+1)
         f.write("\n")
         f.write("UserID:"+lastID+"\n")
+
 
     else:
         # If the file does not exist, create new file and set UserID to 1 as start
@@ -75,7 +77,6 @@ def register():
     confirmq = input("Save registration? [Y/N]")
     match confirmq:
         case "y" | "Y":
-            # assign userid to selected pet
             f.write("Username:" + userName + "\n")
             f.write("Password:" + password + "\n")
             f.write("Name:" + name + "\n")

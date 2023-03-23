@@ -96,16 +96,16 @@ def userMainMenu(userID):
         match userMainMenuSelection:
             case 1:
                 # View user pets
-                userViewPets.userViewPets()
+                userViewPets.userViewPets(userID)
             case 2:
                 # Adopt pets for user
                 userAdopt.userAdopt(userID)
             case 3:
                 # Display owned pets by user
-                userDisplayOwned.userDisplayOwned()
+                userDisplayOwned.userDisplayOwned(userID)
             case 4:
                 # Modify user information
-                userModifyInfo.userModifyInfo()
+                userModifyInfo.userModifyInfo(userID)
             case 5:
                 # User logout, returns to mainMenu.py
                 condition = False

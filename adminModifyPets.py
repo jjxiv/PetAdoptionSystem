@@ -152,5 +152,3 @@ def adminModifyPets():
             print("Returning to menu")
     # except:
     #     input("Invalid input. Please try again.")
-
-adminModifyPets()

@@ -1,6 +1,6 @@
-import os
+import os, userMainMenu
 
-def userModifyInfo():
+def userModifyInfo(userID):
     condition = False
     #retrieve user information
     print("============Modify User Information=============")
@@ -8,6 +8,17 @@ def userModifyInfo():
     if os.path.exists("userDatabase.txt"):
         username = []  # usernames from text will be stored in this list
         password = []  # passwords from text file will be stored in this list
+
+        f1 = open("userDatabase.txt", "r+")
+        userID = []  # This variable stores the user id's
+        text = f1.readline()
+        ctr = 0
+        while text:
+            if ctr%7==0:
+                userID.append(text)
+            text = f1.readline()
+            ctr+=1
+        f1.close()
 
         f = open("userDatabase.txt", "r")
         text = f.readline()  # used for getting the username and password
@@ -43,10 +54,9 @@ def userModifyInfo():
                 num = getID.index(tempUserName)
                 userID = getID[num - 1]
                 # userID set as session login variable
-
                 f.close()
                 fText.close()
-                userMainMenu(userID)
+                #userMainMenu(userID)
             else:
                 print("[System] Invalid credentials, please try again...")
         else:
@@ -55,36 +65,64 @@ def userModifyInfo():
         print("[System] No existing user database...")
 
     if condition:
-        Username = str(input("Enter new username:"))
-        Password = str(input("Enter new password:"))
-        Name = str(input("Enter new name:"))
-        EmailAddress = str(input("Enter new email address:"))
-        Bday = str(input("Enter new bday:"))
+        uid = userID
+        with open("userDatabase.txt", "r") as f:
+            lines = f.readlines()
 
+        if uid in lines:
+            num = lines.index(uid)
+            if uid == lines[-7]:
+                for i in range(0, 6):
+                    del lines[num]
+            else:
+                for i in range(0, 7):
+                    del lines[num]
 
+            with open("userDatabase.txt", "w") as f:
+                if lines:
+                    if lines[-1] == "\n":
+                        del lines[-1]
+                f.writelines(lines)
+                print("[System]",uid.strip(),"is going to be modified")
+        else:
+            print("[System] Cannot find the user id to modify.")
 
+        userName = str(input("Enter new username:"))
+        password = str(input("Enter new password:"))
+        name = str(input("Enter new name:"))
+        emailAddress = str(input("Enter new email address:"))
+        birthday = str(input("Enter birthday:"))
 
+        # Display information from user input
+        print("=======================================")
+        print("Registration information:")
+        print("Username:", userName)
+        print("Password:", password)
+        print("Name:", name)
+        print("Email Address:", emailAddress)
+        print("Birthday:", birthday)
+        print("=======================================")
 
-    birthday = str(input("Enter birthday:"))
+        confirmq = input("Confirm Changes? [Y/N]")
 
-    print("Username: ", userName)
-    print("Password: ", password)
-    print("Name: ", name)
-    print("Email Address: ", emailAddress)
-    print("Birthday: ", birthday)
-
-    confirmq = input("Confirm Changes? [Y/N]")
-
-    match confirmq:
-        case "y" | "Y":
-            #save changes to db
-            print("Information successfully updated.")
-            input("Press Enter to continue...")
-            pass
-        case "n" | "N":
-            print("Operation cancelled.")
-            input("Press Enter to continue...")
-            pass
-        case _:
-            print("Invalid input. Please try again.")
-            userModifyInfo()
+        match confirmq:
+            case "y" | "Y":
+                #save changes to db
+                f = open("userDatabase.txt", "a")
+                if len(userID) > 1:
+                    f.write("\n")
+                f.write(userID)
+                f.write("Username:" + userName + "\n")
+                f.write("Password:" + password + "\n")
+                f.write("Name:" + name + "\n")
+                f.write("EmailAddress:" + emailAddress + "\n")
+                f.write("Bday:" + birthday + "\n")
+                print("[System] Registration success...")
+                f.close()
+                pass
+            case "n" | "N":
+                print("Operation cancelled.")
+                input("Press Enter to continue...")
+                pass
+            case _:
+                print("Invalid input. Please try again.")

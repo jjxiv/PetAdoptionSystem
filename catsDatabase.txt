@@ -6,16 +6,16 @@ Gender:male
 Age:3
 Picture:mellow.jpeg
 
-PetID:2
-OwnerID:null
+PetID:3
+OwnerID:2
 Name:mellow
 Breed:persian
 Gender:male
 Age:3
 Picture:mellow.jpeg
 
-PetID:3
-OwnerID:null
+PetID:2
+OwnerID:4
 Name:mellow
 Breed:persian
 Gender:male

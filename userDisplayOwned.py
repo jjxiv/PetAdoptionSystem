@@ -1,10 +1,54 @@
+import os
 import userMainMenu
 
-def userDisplayOwned():
+def userDisplayOwned(userID):
+    parts = userID.split(":")
+    userID = int(parts[1])
 
-    #retrieve pets owned by user
+    headers = ["Pet ID", "Owner ID", "Name", "Breed", "Gender", "Age", "Photo"]
+    print('{:<10}{:<10}{:<10}{:<10}{:<10}{:<10}{:<10}'.format(*headers))
 
-    input("Press Enter to continue...")
+    #retrieve dogs owned by user
+    if os.path.exists("dogsDatabase.txt"):
+        f = open("dogsDatabase.txt", "r")
 
+        lines = f.readlines()
+        lines = [line.strip('\n').strip() for line in lines]
+        lines = [line.split(':')[1].strip() if ':' in line else line for line in lines]
+        chunks = []
+        for i in range(0, len(lines), 8):
+            chunk = [line.split(':')[1].strip() if ':' in line else line for line in lines[i:i + 8]]
+            if chunk[1] == str(userID):
+                chunks.append(chunk)
 
+        if len(chunks) == 0:
+            print("No pets owned by this user.")
+        else:
+            for chunk in chunks:
+                print('{:<10}{:<10}{:<10}{:<10}{:<10}{:<10}{:<10}'.format(*chunk))
 
+    else:
+        open("dogsDatabase.txt", "x")
+
+    #retrieve cats owned by user
+    if os.path.exists("catsDatabase.txt"):
+        f = open("catsDatabase.txt", "r")
+
+        lines = f.readlines()
+        lines = [line.strip('\n').strip() for line in lines]
+        lines = [line.split(':')[1].strip() if ':' in line else line for line in lines]
+        chunks = []
+        for i in range(0, len(lines), 8):
+            chunk = [line.split(':')[1].strip() if ':' in line else line for line in lines[i:i + 8]]
+            if chunk[1] == str(userID):
+                chunks.append(chunk)
+
+        if len(chunks) == 0:
+            print("No pets owned by this user.")
+        else:
+            for chunk in chunks:
+                print('{:<10}{:<10}{:<10}{:<10}{:<10}{:<10}{:<10}'.format(*chunk))
+    else:
+        open("catsDatabase.txt", "x")
+
+    input("Press enter to continue.")
