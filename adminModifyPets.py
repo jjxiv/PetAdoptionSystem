@@ -8,7 +8,7 @@
 """
 
 
-# Imported os library for file handling
+# Imported os library
 import os
 
 
@@ -20,7 +20,7 @@ import os
                     and saves the modified information to the database.
 """
 def adminModifyPets():
-    # try:
+    try:
         dogsDB = "dogsDatabase.txt"
         catsDB = "catsDatabase.txt"
         valid = False
@@ -52,7 +52,7 @@ def adminModifyPets():
 
                 if pid in lines:
                     temp = pid
-                    tempList = []
+                    tempList = [] # for debugging
                     print("Pet information to be modified: ")
                     num = lines.index(pid)
                     if pid == lines[-7]:
@@ -67,15 +67,13 @@ def adminModifyPets():
                         for j in range(0,8):
                             del lines[num]
 
-                    print("The value of tempList is: ",tempList)
-
                     with open(petsDB, "w") as f:
                         if lines:
                             if lines[-1] == "\n":
                                 del lines[-1]
                                 pass
                         f.writelines(lines)
-                        print(pid.strip(), "is going to be modified")
+                        print("[System]",pid.strip(), "is going to be modified")
 
                     # Add the information again
                     print("============Modify Information Pets=============")
@@ -90,7 +88,7 @@ def adminModifyPets():
                                 petID.append(text)
                             text = f.readline()
 
-                        print("PetID values:", petID)
+                        # print("PetID values:", petID)
                         print("")
                         if petID:
                             lastID = str(temp)
@@ -115,8 +113,6 @@ def adminModifyPets():
 
                     print("=======================================")
                     print("Registration information:")
-                    print(petID)
-                    print(ownerID)
                     print(petName)
                     print(petBreed)
                     print(petGender)
@@ -136,19 +132,21 @@ def adminModifyPets():
                             f.write(petGender+"\n")
                             f.write(petAge+"\n")
                             f.write(petPicture+"\n")
-                            print("[System] Registration success...")
+                            print("[System] Modification success...")
                         case "n" | "N":
-                            print("[System] Registration cancelled...")
+                            print("[System] Modification cancelled...")
                             pass
                         case _:
                             print("[System] Invalid input, please try again...")
-                    input("Press Enter to continue...")
                     f.close()
                 else:
-                    print("[System] \"", pid.strip(), "\" does not exist.")
+                    print("[System] \"", pid.strip(), "\" does not exist.\n")
             else:
                 print("[System] There is no existing pet database")
         else:
-            print("Returning to menu")
-    # except:
-    #     input("Invalid input. Please try again.")
+            print("[System] Returning to menu")
+
+    except Exception as e:
+        print("[System] Error encountered")
+        print("[System]", e)
+

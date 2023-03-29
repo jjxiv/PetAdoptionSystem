@@ -54,7 +54,7 @@ def login():
 
             if userPasswordInput == pIndex:
                 # checks if password input matches password
-                print("Successful Login")
+                print("\n[System] Successful Login\n")
 
                 # Obtain user ID from the readlines
                 tempUserName = "Username:"+userNameInput +"\n"

@@ -6,9 +6,11 @@
                     of different functions from different python files.
 """
 
+
 # Imported python files and library
-import adminAddPets, adminRemovePets
+import adminRemovePets
 import adminModifyPets, os
+
 
 """
     Method name:    login()
@@ -47,7 +49,7 @@ def login():
 
             if userPasswordInput == pIndex:
                 # checks if password input matches password
-                print("Successful Login")
+                print("[System] Successful Login\n")
                 adminMainMenu()
                 f.close()
             else:
@@ -90,7 +92,8 @@ def adminAddPets():
         if os.path.exists(petsDB):
             print("[System] Retrieving existing files")
             f = open(petsDB, "r+")
-            petID = [] # Store here the pet id's
+            petID = []  # Store here the pet id's
+            tempID = [] # temporary pet id's
             text = f.readline()
 
             # check pet id's and add them to the list
@@ -101,11 +104,11 @@ def adminAddPets():
             print()
 
             if petID:
-                lastID = petID[-1]
-                # !!!WARNING!!!
-                # Note: replace the line above with the greatest
-                # pet ID not the latest
-                lastID = lastID.replace("PetID:", "")
+                for i in petID:
+                    temp = int(i.replace("PetID:", "").strip())
+                    tempID.append(temp)
+
+                lastID = max(tempID)
                 lastID = str(int(lastID) + 1)
                 f.write("\n")
                 f.write("PetID:" + lastID + "\n")
@@ -117,6 +120,7 @@ def adminAddPets():
             f.write("PetID:" + "1\n")
             pass
 
+        print("=======================================")
         petName = str(input("Enter Pet Name: "))
         petBreed = str(input("Enter Pet Breed: "))
         petGender = str(input("Enter Pet Gender: "))
@@ -133,7 +137,7 @@ def adminAddPets():
         print("Pet Age:", petAge)
         print("Pet Picture:", petPicture)
         print("=======================================")
-        input("Press Enter to continue...")
+        input("[System] Press Enter to continue...")
 
         # User will input if the registration should be saved
         confirmq = input("Save registration? [Y/N]")
@@ -151,7 +155,6 @@ def adminAddPets():
                 pass
             case _:
                 print("[System] Invalid input, please try again...")
-        input("Press Enter to continue...")
         f.close()
     else:
         print("[System] Unsuccessful, returning to main menu...")
@@ -172,10 +175,6 @@ def adminMainMenu():
         match choice:
             case 1:
                 # Register Function
-                # !!!WARNING!!!
-                # Note: Delete adminAddPets.py file in github master repo
-                # If done, delete this comment and the comment above
-                # Add pets
                 adminAddPets()
             case 2:
                 # Remove pets

@@ -1,5 +1,20 @@
-import os, userMainMenu
+"""
+    File name:      userModifyInfo.py
+    Authors:        Jericho John Almoro,
+                    Rico Ray Alido
+    Description:    The file contains the user modification of information
+                    for flexibility upon changes. This requires the user to
+                    re-login for verification.
+"""
 
+import os
+
+"""
+    Method name:    userModifyInfo()
+    Parameters:     userID
+    Return Type:    none
+    Description:    A method that contains modifying the user's information.
+"""
 def userModifyInfo(userID):
     condition = False
     #retrieve user information

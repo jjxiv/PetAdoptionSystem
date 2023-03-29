@@ -1,4 +1,23 @@
+"""
+    File name:      adminRemovePets.py
+    Authors:        Jericho John Almoro,
+                    Rico Ray Alido
+    Description:    The file contains the operations for removing a pet
+                    through admin privileges.
+"""
+
+
+# Imported python library
 import os
+
+
+"""
+    Method name:    adminRemovePets()
+    Parameters:     none
+    Return Type:    none
+    Description:    A method that contains removing a pet through 
+                    admin privileges.
+"""
 def adminRemovePets():
     try:
         dogsDB = "dogsDatabase.txt"
@@ -18,7 +37,7 @@ def adminRemovePets():
                 petsDB = catsDB
                 valid = True
             case __:
-                print("Entered value is invalid: ", choice)
+                print("[System] Invalid input, please try again...")
 
         if valid == True:
             if os.path.exists(petsDB):
@@ -42,33 +61,14 @@ def adminRemovePets():
                             if lines[-1] == "\n":
                                 del lines[-1]
                         f.writelines(lines)
-                        print(pid.strip(), "has been deleted")
+                        print("[System]",pid.strip(), "has been deleted\n")
                 else:
-                    print("[System] \"", pid.strip(), "\" does not exist.")
+                    print("[System] \"", pid.strip(), "\" does not exist.\n")
             else:
-                print("[System] There is no existing pet database")
+                print("[System] There is no existing pet database\n")
         else:
             print("[System] Returning to menu")
     except:
         input("Invalid input. Please try again.")
-
-    #retrieve the pet from database
-    #display the pet details
-
-    # confirmq = input("Remove this pet? [Y/N]")
-    #
-    # match confirmq:
-    #     case "y" | "Y":
-    #         #assign userid to selected pet
-    #         print("Pet has been removed from the listing.")
-    #         input("Press Enter to continue...")
-    #         pass
-    #     case "n" | "N":
-    #         print("Operation cancelled.")
-    #         input("Press Enter to continue...")
-    #         pass
-    #     case _:
-    #         print("Invalid input. Please try again.")
-    #         adminRemovePets()
 
 

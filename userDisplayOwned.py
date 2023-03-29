@@ -1,3 +1,14 @@
+"""
+    File name:      mainMenu.py
+    Authors:        Jericho John Almoro,
+                    Rico Ray Alido
+    Description:    The file contains the owned pet display for Pet
+                    Adoption System.It consists of different functions
+                    from different python files.
+    Date:
+"""
+
+
 import os
 import userMainMenu
 

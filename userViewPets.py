@@ -1,4 +1,22 @@
-import os, userMainMenu
+"""
+    File name:      userViewPets.py
+    Authors:        Jericho John Almoro,
+                    Rico Ray Alido
+    Description:    The file contains the displayed pets for user logged in.
+                    This enables the user to view pet details in tabular form
+                    or view pets based on a specific criteria.
+"""
+
+# Imported python library
+import os
+
+"""
+    Method name:    pets()
+    Parameters:     petsDB, userID
+    Return Type:    none
+    Description:    A method that contains the pets method that allows user
+                    to view pets and search for specific type of pets.
+"""
 def pets(petsDB,userID):
     print("=======================================")
     print("[1] View Pet Details (Tabular)")
@@ -17,12 +35,21 @@ def pets(petsDB,userID):
             pass
         case __:
             print("[System] Invalid user input")
-    pass
+
+
+"""
+    Method name:    vpTabular()
+    Parameters:     petsDB, userID
+    Return Type:    none
+    Description:    A method that contains the tabular form when 
+                    displaying the pets information.
+"""
 def vpTabular(petsDB,userID):
     parts = userID.split(":")
     userID = int(parts[1])
 
     headers = ["Pet ID", "Owner ID", "Name", "Breed", "Gender", "Age", "Photo"]
+    print("\n===================================================================")
     print('{:<10}{:<10}{:<10}{:<10}{:<10}{:<10}{:<10}'.format(*headers))
 
     # retrieve dogs owned by user
@@ -41,6 +68,8 @@ def vpTabular(petsDB,userID):
         if len(chunks) == 0:
             print("No pets owned by this user.")
         else:
+
+            print("-------------------------------------------------------------------")
             for chunk in chunks:
                 print('{:<10}{:<10}{:<10}{:<10}{:<10}{:<10}{:<10}'.format(*chunk))
 
@@ -50,6 +79,14 @@ def vpTabular(petsDB,userID):
     input("Press enter to continue.")
     pass
 
+
+"""
+    Method name:    specificCriteria()
+    Parameters:     petsDB, userID
+    Return Type:    none
+    Description:    A method that contains the specific criteria for 
+                    searching a pet.
+"""
 def specificCriteria(petsDB,userID):
     criteria = 0
     valid = False
@@ -113,27 +150,32 @@ def specificCriteria(petsDB,userID):
         pass
 
 
-
+"""
+    Method name:    userViewPets()
+    Parameters:     userID
+    Return Type:    none
+    Description:    A method that contains the menu for user view pets.
+"""
 def userViewPets(userID):
     print("=========Available Pet Details=========")
     print("[1] Dogs")
     print("[2] Cats")
     print("[3] Exit")
     print("=======================================")
-    userViewPetsSelection = input("Enter a number:")
+    choice = int(input("Enter a number:"))
 
-    match userViewPetsSelection:
-        case "1":
+    match choice:
+        case 1:
             petsDB = "dogsDatabase.txt"
             pets(petsDB,userID)
             input("Press Enter to continue...")
             pass
-        case "2":
+        case 2:
             petsDB = "catsDatabase.txt"
             pets(petsDB,userID)
             input("Press Enter to continue...")
             pass
-        case "3":
+        case 3:
             pass
         case _:
             print("Invalid input. Please try again.")

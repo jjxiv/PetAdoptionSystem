@@ -1,5 +1,22 @@
-import os, userMainMenu
+"""
+    File name:      userAdopt.py
+    Authors:        Jericho John Almoro,
+                    Rico Ray Alido
+    Description:    The file contains the option for a user to adopt
+                    a pet that will be stored to user's owned pets.
+"""
 
+
+import os
+
+
+"""
+    Method name:    adopt()
+    Parameters:     petsDB, userID
+    Return Type:    none
+    Description:    A method that contains adopting a pet. In addition,
+                    this method saves the ownership in the pets database.
+"""
 def adopt(petsDB,uID):
     if os.path.exists(petsDB):
         print("The USER ID LOGGED IN IS: ",uID)
@@ -82,12 +99,21 @@ def adopt(petsDB,uID):
             print("[System] \"", pid.strip(), "\" does not exist.")
     pass
 
+
+"""
+    Method name:    userAdopt()
+    Parameters:     userID
+    Return Type:    none
+    Description:    A method that contains adopting a pet. This is the
+                    main menu for user adoption.
+"""
 def userAdopt(userID):
     try:
         print("The user is is:",userID)
         condition = True
         print("The value of userid in useradopt is:",userID)
         uID = userID
+
         while condition:
             print("==========Adopt A Pet==========")
             print("[1] Dogs")
@@ -105,23 +131,9 @@ def userAdopt(userID):
                 case 3:
                     condition = False
                 case __:
-                    print("Entered value is invalid: ", choice)
-            # confirmq = input("Adopt this pet? [Y/N]")
-            # match confirmq:
-            #     case "y" | "Y":
-            #         # assign userid to selected pet
-            #         print("Pet has been added to your listing.")
-            #         input("Press Enter to continue...")
-            #         pass
-            #     case "n" | "N":
-            #         print("Operation cancelled.")
-            #         input("Press Enter to continue...")
-            #         pass
-            #     case _:
-            #         print("Invalid input. Please try again.")
+                    print("[System] Invalid user input")
     except Exception as e:
-        print("Error encountered")
-        print(e)
+        print("[System] Error encountered")
+        print("[System]",e)
 
-# userAdopt()
 

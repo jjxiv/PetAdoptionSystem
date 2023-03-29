@@ -5,7 +5,6 @@
     Description:    The file contains the main menu for Pet Adoption System.
                     It consists of different functions from different python
                     files.
-    Date:
 """
 
 
@@ -115,25 +114,27 @@ def mainMenu():
         match choice:
             case 1:
                 # Register Function
-                # !!!WARNING!!!
-                # Note: Delete userRegister.py file in github master repo
-                # If done, delete this comment and the comment above
-                # Regitser user
+                print()
                 register()
             case 2:
                 # User Login
+                print()
                 userMainMenu.login()
             case 3:
                 # Admin Login
+                print()
                 adminMainMenu.login()
             case 4:
                 # View Available Pets
+                print()
                 viewPets.availablePets()
             case 5:
                 # Temrinates Pet Adoption System
                 condition = False
+                print()
                 print("[System] Program Terminated...")
             case _:
+                print()
                 print("[System] Invalid input, please try again...")
 
 
